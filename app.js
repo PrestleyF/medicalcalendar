@@ -20,6 +20,7 @@ const today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 
+
 const drawBlankCalendar = () =>{
     for(let i=0; i < 35; i++){
       const day = document.createElement('div')
@@ -46,7 +47,7 @@ const drawBlankCalendar = () =>{
 const updateCalendar = (month, year, events) => {
     const dayElements = document.querySelectorAll('.day');
     
-    const theFirst = new Date();
+    const theFirst = new Date(year, month, 1); //made changes, added (year, month, 1) here 19/10/23
     theFirst.setMonth(month);
     theFirst.setFullYear(year);
 
@@ -89,7 +90,21 @@ const nextMonth = () => {
     updateCalendar(currentMonth, currentYear);
 }
 
+document.addEventListener('DOMContentLoaded', function(){
+    const calendar = document.getElementById('calendar');
+    calendar.addEventListener('click', function(event){
+        const clickedDay = event.target;
+        if(clickedDay.classList.contains('day-number')){
+            const selectedDate = clickedDay.innerText;
+            openNotesApp(selectedDate);
+        }
+    })
+})
 
+function openNotesApp(selectedDay){
+    const notesAppUrl = `path/tp/notes-app?date=${selectedDay}`;
+    window.open(notesAppUrl, '_blank');
 
+}
 drawBlankCalendar();
 updateCalendar(currentMonth, currentYear);
