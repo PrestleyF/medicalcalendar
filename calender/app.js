@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 function openNotesApp(selectedDay){
-    const notesAppUrl = `path/tp/notes-app?date=${selectedDay}`;
+    const notesAppUrl = `./notes.js?date=${selectedDay}`;
     window.open(notesAppUrl, '_blank');
 
 }
